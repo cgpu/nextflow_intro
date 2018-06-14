@@ -1,0 +1,162 @@
+digraph flowchart {
+p0 [shape=point,label="",fixedsize=true,width=0.1,xlabel="Channel.fromFilePairs"];
+p1 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="ifEmpty"];
+p0 -> p1;
+
+p1 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="ifEmpty"];
+p2 [shape=point];
+p1 -> p2 [label="local_read_files"];
+
+p3 [shape=point,label="",fixedsize=true,width=0.1];
+p5 [label="fetchRef"];
+p3 -> p5 [label="url"];
+
+p4 [shape=point,label="",fixedsize=true,width=0.1];
+p5 [label="fetchRef"];
+p4 -> p5 [label="name"];
+
+p5 [label="fetchRef"];
+p21 [label="kangaIndex"];
+p5 -> p21 [label="kangaRefs"];
+
+p5 [label="fetchRef"];
+p18 [label="hisat2Index"];
+p5 -> p18 [label="hisat2Refs"];
+
+p5 [label="fetchRef"];
+p12 [label="kangaSimReads"];
+p5 -> p12 [label="simReadsRefs"];
+
+p6 [shape=point,label="",fixedsize=true,width=0.1];
+p8 [label="fetchReads"];
+p6 -> p8 [label="reads1url"];
+
+p7 [shape=point,label="",fixedsize=true,width=0.1];
+p8 [label="fetchReads"];
+p7 -> p8 [label="reads2url"];
+
+p8 [label="fetchReads"];
+p14 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="mix"];
+p8 -> p14 [label="FASTQ"];
+
+p8 [label="fetchReads"];
+p19 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="mix"];
+p8 -> p19 [label="hisat2FASTQ"];
+
+p8 [label="fetchReads"];
+p22 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="mix"];
+p8 -> p22 [label="kangaFASTQ"];
+
+p9 [shape=point,label="",fixedsize=true,width=0.1];
+p12 [label="kangaSimReads"];
+p9 -> p12 [label="__$eachinparam<1>"];
+
+p10 [shape=point,label="",fixedsize=true,width=0.1];
+p12 [label="kangaSimReads"];
+p10 -> p12 [label="__$eachinparam<2>"];
+
+p11 [shape=point,label="",fixedsize=true,width=0.1];
+p12 [label="kangaSimReads"];
+p11 -> p12 [label="__$eachinparam<3>"];
+
+p12 [label="kangaSimReads"];
+p22 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="mix"];
+p12 -> p22 [label="kangaReads"];
+
+p12 [label="kangaSimReads"];
+p19 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="mix"];
+p12 -> p19 [label="hisat2reads"];
+
+p12 [label="kangaSimReads"];
+p13 [label="fasta2mockFASTQ"];
+p12 -> p13 [label="fa2fqreads"];
+
+p13 [label="fasta2mockFASTQ"];
+p14 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="mix"];
+p13 -> p14 [label="MockFASTQ"];
+
+p14 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="mix"];
+p15 [label="fastQC"];
+p14 -> p15;
+
+p15 [label="fastQC"];
+p16 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+p15 -> p16 [label="fastqc_results"];
+
+p16 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+p17 [label="multiQC"];
+p16 -> p17;
+
+p17 [label="multiQC"];
+p32 [label="MOCK_generateReportMatter"];
+p17 -> p32 [label="multiqc_report"];
+
+p17 [label="multiQC"];
+p32 [label="MOCK_generateReportMatter"];
+p17 -> p32 [label="multiqc_data"];
+
+p18 [label="hisat2Index"];
+p20 [label="hisat2Align"];
+p18 -> p20 [label="hisat2dbs"];
+
+p19 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="mix"];
+p20 [label="hisat2Align"];
+p19 -> p20;
+
+p20 [label="hisat2Align"];
+p24 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="mix"];
+p20 -> p24 [label="hisat2BAMs"];
+
+p21 [label="kangaIndex"];
+p23 [label="kangaAlign"];
+p21 -> p23 [label="kangadbs"];
+
+p22 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="mix"];
+p23 [label="kangaAlign"];
+p22 -> p23;
+
+p23 [label="kangaAlign"];
+p24 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="mix"];
+p23 -> p24 [label="kangaBAMs"];
+
+p24 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="mix"];
+p25 [label="extractStatsFromBAMs"];
+p24 -> p25;
+
+p25 [label="extractStatsFromBAMs"];
+p26 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+p25 -> p26 [label="statsFiles"];
+
+p25 [label="extractStatsFromBAMs"];
+p27 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="first"];
+p25 -> p27 [label="longtags"];
+
+p26 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+p28 [label="combineStats"];
+p26 -> p28;
+
+p27 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="first"];
+p28 [label="combineStats"];
+p27 -> p28;
+
+p28 [label="combineStats"];
+p29 [label="MOCK_generateFigures"];
+p28 -> p29 [label="allStatsForFigs"];
+
+p28 [label="combineStats"];
+p32 [label="MOCK_generateReportMatter"];
+p28 -> p32 [label="allStatsForDoc"];
+
+p29 [label="MOCK_generateFigures"];
+p30 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+p29 -> p30 [label="figures"];
+
+p30 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+p32 [label="MOCK_generateReportMatter"];
+p30 -> p32;
+
+p31 [shape=point,label="",fixedsize=true,width=0.1];
+p32 [label="MOCK_generateReportMatter"];
+p31 -> p32 [label="docheader"];
+
+}
