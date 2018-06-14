@@ -133,11 +133,13 @@ sessionInfo()
 
 ## [Nextflow](https://www.nextflow.io/) 
 
-### A Workflow management system which promises 
 
-  * Portability, scalability and reproducibility
 
-### Features 
+* Designed for 
+  * specific use case: seamless scalability of existing tools and scripts
+  * for bioinformaticians familiar with programming
+
+### Features
 
 * Separation of pipeline logic from compute environment definition(s)
 * Syntax is a superset of Groovy, but **polyglot**
@@ -146,6 +148,8 @@ sessionInfo()
 * Multiple _executors_
   * SGE, LSF, **SLURM**, PBS/Torque, NQSII HTCondor, Ignite, Kubernets, AWS Batch
 * NEW! Support for Conda/[Bioconda](https://bioconda.github.io/)
+
+
     
 <small>[https://www.nature.com/articles/nbt.3820/](https://www.nature.com/articles/nbt.3820)</small>
 
@@ -154,18 +158,21 @@ sessionInfo()
 
 ## More about Nextflow 
 
-* Designed for specific use case: seamless scalability of existing tools and scripts
-* Aimed at 
-
-* Processes (tasks) in separate work directories
+* *Processes* (tasks) executed in separate work directories
   * safe and lock-free parallelization
   * easy cleanup, no issue of partial results following an error
-* Channels
+* *Channels* 
+  * facilitate data flow between processes
+  
+----
 
-*The dataflow model is superior to alternative solutions based on a Make-like approach, such as Snakemake, in which computation involves the pre-estimation of all computational dependencies, starting from the expected results up until the input raw data. A Make-like procedure requires a directed acyclic graph (DAG), whose storage requirement is a limiting factor for very large computations. In contrast, as the top to bottom processing model used by Nextflow follows the natural flow of data analysis, it does not require a DAG. Instead, the graph it traverses is merely incidental and does not need to be pre-computed or even stored, thereby ensuring high scalability.*
+
+## According to authors
+ 
+* *The dataflow model is superior to alternative solutions based on a Make-like approach, such as Snakemake, in which computation involves the pre-estimation of all computational dependencies, starting from the expected results up until the input raw data. A Make-like procedure requires a directed acyclic graph (DAG), whose storage requirement is a limiting factor for very large computations. In contrast, as the top to bottom processing model used by Nextflow follows the natural flow of data analysis, it does not require a DAG. Instead, the graph it traverses is merely incidental and does not need to be pre-computed or even stored, thereby ensuring high scalability.*
 
 
-<!--<!--Collected and abbreviated from [here](https://groups.google.com/forum/#!topic/nextflow/Kg_0jv4SS_Q)-->-->
+<!--Collected and abbreviated from [here](https://groups.google.com/forum/#!topic/nextflow/Kg_0jv4SS_Q)-->
 
 <!--Individual work directories are core to how NextFlow works and come with several benefits, reproducibility, makes debugging easier, facilitates simple integration into containers and allows separation of workflow steps to avoid unintended consequences. It must also be noted this mechanism enable to parallelise the tasks in a safe and lock-free manner and to resume the pipeline execution seamlessly, in a consistent manner ie. without retained partial outputs following an unexpected error.-->
 
@@ -211,7 +218,7 @@ curl -s https://get.nextflow.io | bash
 
 ----
 
-## Syntax (Hello world)
+## Hello ~~world~~ syntax
 
 ```{bash, comment=''} 
 curl -sL  https://raw.githubusercontent.com/nextflow-io/hello/master/main.nf
@@ -257,7 +264,7 @@ nextflow run hello -r 451ebd9
 <div class="column-right">
 
 ```{bash, comment=''}
-nextflow run blast/blast.nf -with-dag doc/blast.png | head -20
+nextflow run blast/blast.nf -with-dag doc/blast.png
 ```
 
 </div>
@@ -340,7 +347,7 @@ dot -Tpng -Gsize=9,7\! -Gdpi=100 -odoc/flowchart_small.png doc/flowchart.dot
 
 ## Pipeline syntax
 
-* Primarily definitions of processes, each with well defined input and output channels
+* Primarily definitions of *processes*, each with well defined input and output values and/or files, usually passed through *channels* 
 
 ```{bash, comment=''}
 curl -sL https://raw.githubusercontent.com/csiro-crop-informatics/reproducible_poc/develop/main.nf
