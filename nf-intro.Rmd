@@ -203,9 +203,9 @@ curl -s https://get.nextflow.io | bash
 
 * Available on PATH or under `bin/` 
 * via Docker
-* via Singularity - available on our HPC
-* via Conda - `miniconda` available on our HPC
-* via Modules - available* on our HPC
+* via Singularity
+* via Conda
+* via Modules
 
 ----
 
@@ -255,7 +255,7 @@ nextflow run hello -r 451ebd9
 <div class="column-right">
 
 ```{bash, comment=''}
-nextflow run blast/blast.nf -with-dag doc/blast.png
+nextflow run blast-example -with-docker -with-dag doc/blast.png
 ```
 
 </div>
